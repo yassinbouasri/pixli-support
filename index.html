@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixli App Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors - Dark Mode */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-card: rgba(26, 26, 36, 0.7);
+            --bg-card-hover: rgba(35, 35, 50, 0.9);
+
+            /* Accents */
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+
+            /* Text */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+
+            /* Spacing & Radius */
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 3rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+
+            /* Effects */
+            --shadow-lg: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Subtle Background Mesh */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15), transparent 40%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) 0;
+            flex-grow: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Logo Wrapper to fix edges */
+        .logo-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 36px;
+            margin: 0 auto 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+            background: #000;
+        }
+
+        .logo-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px -10px rgba(99, 102, 241, 0.4);
+        }
+
+        .app-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Scale up slightly to crop out the white pixel edges */
+            transform: scale(1.02);
+            will-change: transform;
+        }
+
+        /* Inner Shadow Overlay to hide white fringing */
+        .logo-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 36px;
+            /* Strong inset shadow to cover white pixels */
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 4px 1px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Card Style */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .email-link {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent-primary);
+            padding-bottom: 2px;
+            transition: all 0.2s;
+        }
+
+        .email-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="hero">
+            <div class="logo-wrapper">
+                <img src="logo.png" alt="Pixli App Icon" class="app-logo">
+            </div>
+            <h1>Pixli Support</h1>
+            <p class="subtitle">AI-Powered Image Generation & Editing for Professionals</p>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">👋</div>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">How can we help?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
+                Experiencing technical issues or have a feature request? <br>
+                Our team is ready to assist you directly.
+            </p>
+
+            <a href="mailto:yassinbouasri@outlook.com" class="email-link">yassinbouasri@outlook.com</a>
+
+            <br>
+
+            <a href="mailto:yassinbouasri@outlook.com" class="btn-primary">
+                Contact Support
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Pixli App. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#">Privacy Policy</a> •
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
